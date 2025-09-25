@@ -25,7 +25,6 @@ for pred_len in ${pred_lens[@]}; do
 		--e_layers ${e_layers} \
 		--enc_in 862 \
 		--c_out 862 \
-		--itr 1 \
 		--d_model ${d_model} \
 		--d_ff ${d_ff} \
 		--learning_rate ${learning_rate} \
