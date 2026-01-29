@@ -8,11 +8,11 @@ from layers.StandardNorm import Normalize
 from scipy import special as sc_special
 
 
-class MultiScaleProcessor(nn.Module):
-    """Multi-scale processing module for handling temporal and feature transformations."""
+class ForecastingModule(nn.Module):
+    """Forecasting module for handling temporal and feature transformations."""
     
     def __init__(self, configs):
-        """Initialize multi-scale processor with configuration parameters."""
+        """Initialize forecasting module with configuration parameters."""
         super().__init__()
         self.seq_len = configs.seq_len
         self.activation = nn.GELU
@@ -181,9 +181,9 @@ class Model(nn.Module):
         self.label_len = configs.label_len
         self.pred_len = configs.pred_len
         self.channel_independence = configs.channel_independence
-        # Multi-scale processor blocks
-        self.multi_scale_processors = nn.ModuleList([
-            MultiScaleProcessor(configs) for _ in range(configs.e_layers)
+        
+        self.forecasting_modules = nn.ModuleList([
+            ForecastingModule(configs) for _ in range(configs.e_layers)
         ])
 
         self.enc_in = configs.enc_in
@@ -260,7 +260,7 @@ class Model(nn.Module):
         
         for j in range(self.layer):
             enc_out_list = self.multi_scale_generators[j](enc_out_list)
-            enc_out_list = self.multi_scale_processors[j](enc_out_list)
+            enc_out_list = self.forecasting_modules[j](enc_out_list)
         
         dec_out_list = []
         for i, enc_out in zip(range(len(enc_out_list)), enc_out_list):
