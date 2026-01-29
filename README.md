@@ -1,10 +1,8 @@
-# UNIFYING MULTI-SCALE DESIGN IN TIME-SERIES FORECASTING
-
-## Official implementation of SiGMA.
+# Official implementation of SiGMA.
 
 ## TL;DR
 
-- We propose **SiGMA**, a simple yet principled multi-scale time series forecasting framework that overcomes the limitations of existing multi-scale forecasting approaches.
+- We propose **SiGMA**, a principled multi-scale time series forecasting framework that overcomes the limitations of existing multi-scale forecasting approaches.
 - This project is developed based on experiments using [TSLib](https://github.com/thuml/Time-Series-Library), which is distributed under the MIT License.
 
 ## Environment Setup
